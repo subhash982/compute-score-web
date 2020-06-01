@@ -6,27 +6,24 @@ Compute Score By First -  Read all the comma separate name from file and sum up 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Assumptions
-- All the name should contains chars from [A-Z or a-Z] to calculate the score correctly.
+- All the name should contains chars from [A-Z or a-Z] to calculate the score correctly.If it contains other characters then score calculation will not as expected.
 - If name contains small letters then it will be converted to upper case and then calculate the score.
-- Performing the in-memory computation if file size is less then 50KB. This value is configuration through properties.
-- Performing computation using external sorting in chunks (each chunk of 20KB size and configurable through properties) if file size is greater then 50KB
+- Performing the in-memory computation if file size is less then **50KB**. This value is configuration through properties.
+- Performing computation using external sorting in chunks (each chunk of **20KB** size and configurable through properties) if file size is greater then **50KB**.
+- Only implemented for first name based algorithm but can be extended for other algorithms. 
 
 ### Prerequisites
 - Java 8 or later must be installed on your machine
 
 ### Installing / Running
 If you have maven installed on your machine then run the below maven command.
-```
-For Windows :
+<pre>
+<b>For Windows :</b>
 	mvnw.cmd spring-boot:run
 	
-For Linux
+<b>For Linux : </b>
 	.\mvnw spring-boot:run
-```
-If you don't have the maven installed on your machine then run the below maven command.
-```
-mvn spring-boot:run
-```
+</pre>
 After running the application, You can verify the application in two ways
 - From Browser
 ```

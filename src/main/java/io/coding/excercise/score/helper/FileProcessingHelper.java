@@ -59,19 +59,28 @@ public class FileProcessingHelper {
 			String readString = "";
 			String namesToSort = "";
 			while (fis.read(buffer) > 0) {
-
-				// Read the names from file and remove double quotes
+				/*
+				 * Read the names from file and remove double quotes,line chars, tab chars or
+				 * carriage returns
+				 */
 				readString = reminder + new String(buffer);
-				readString = readString.replace("\"", "");
+				readString = readString.trim().replaceAll(ScoreConstants.SPECIAL_CHAR_EXP, "");
 
 				// find the last comma index and calculate complete name list
 				int lastCommaIndex = readString.lastIndexOf(",");
-				namesToSort = readString.substring(0, lastCommaIndex);
-				// Get the last name if splited into 2 parts
-				reminder = readString.substring(lastCommaIndex + 1);
+				if (lastCommaIndex != -1) {
+					namesToSort = readString.substring(0, lastCommaIndex);
+					if (readString.length() == lastCommaIndex + 1) {
+						reminder = "";
+					} else {
+						reminder = readString.substring(lastCommaIndex + 1);
+					}
+				} else {
+					namesToSort = readString;
+				}
+
 				sortAndWriteChunkContentToFile(namesToSort, splitedFilePrefix, chunkCount, comparator);
 				chunkCount++;
-
 				// Reset the buffer
 				buffer = new byte[fileChunkSize];
 			}
@@ -231,7 +240,7 @@ public class FileProcessingHelper {
 	public String readFileContent(String filePath) {
 		StringBuilder builder = new StringBuilder();
 		try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
-			stream.forEach(s -> builder.append(s.replaceAll("\"", "").toUpperCase()));
+			stream.forEach(s -> builder.append(s.trim().replaceAll(ScoreConstants.SPECIAL_CHAR_EXP, "").toUpperCase()));
 		} catch (IOException ex) {
 			throw new ComputeScoreException("Error in reading file content", ex);
 		}
