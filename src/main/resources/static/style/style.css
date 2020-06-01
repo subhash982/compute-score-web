@@ -1,0 +1,19 @@
+
+.card-header {
+	height: 30px;
+	background: #b3b1ab;
+	font-weight: bold;
+	border-style: 5px solid black;
+	
+	
+}
+
+ .card-1 {
+     border-style: 5px solid black;
+     padding-bottom: 3%;
+     width: 600px; 
+     border-color: black; 
+     padding-top: 120px; 
+     padding-right: 100px; 
+     border: thick;
+ }
