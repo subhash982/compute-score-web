@@ -1,6 +1,8 @@
 # Compute a score for list of names
 This project is calculate the score for list of names and can be extended to enhance or change the algorithm to calculate the score.By default it is implementing the below algorithm. 
+<br/>
 <b>Compute Score By First Name:</b>  Read all the comma separate name from file and sum up all the char's int value (A=1,B=2...Z=26) and multiply the summed value with index of name after sorting.
+<br/>
 <b>Compute Score By Full Name:</b> Default implementation provided same as First name but can be changed accordingly. 
 
 ## Getting Started
