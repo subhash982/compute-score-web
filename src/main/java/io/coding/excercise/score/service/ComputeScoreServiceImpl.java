@@ -69,7 +69,7 @@ public class ComputeScoreServiceImpl implements ComputeScoreService {
 				dataStream = inMemoryFileReader.read(filePath, scoreAlgorithm);
 			}
 
-			computedScore = ScoreCalculatorBuilder.buildWith(dataStream, true, scoreAlgorithm).calculate();
+			computedScore = ScoreCalculatorBuilder.buildWith(dataStream, isLargeDataSet, scoreAlgorithm).calculate();
 			//Cleanup all the temporary file created by processing large data set
 			if (isLargeDataSet) {
 				fileProcessingHelper.deleteAllMatchingFiles(targetPath);

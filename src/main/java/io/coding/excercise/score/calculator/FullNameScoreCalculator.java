@@ -31,7 +31,7 @@ public class FullNameScoreCalculator implements ScoreCalculator {
 	public Long calculate() {
 
 		// if Data set is small the perform the in-line sorting on stream
-		if(isLargeDataSet) {
+		if(!isLargeDataSet) {
 			inputDataStream = inputDataStream.sorted(withSorting());
 		}
 		// Holding the index of each record in the sorted stream
