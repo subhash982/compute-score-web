@@ -5,6 +5,7 @@ package io.coding.excercise.score.calculator;
 
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import io.coding.excercise.score.modal.IndexWrapper;
@@ -37,7 +38,7 @@ public class FirstNameScoreCalculator implements ScoreCalculator {
 		}
 		// Holding the index of each record in the sorted stream
 		AtomicLong atomicLong = new AtomicLong(1);
-		return inputDataStream.sorted().map(name -> new IndexWrapper(name, atomicLong.getAndIncrement()))
+		return inputDataStream.filter(withFilter()).sorted().map(name -> new IndexWrapper(name, atomicLong.getAndIncrement()))
 				.map(this::computeScoreByFirstName).reduce(0L, (a, b) -> a + b);
 
 	}
@@ -67,5 +68,16 @@ public class FirstNameScoreCalculator implements ScoreCalculator {
 		return Comparator.comparing(String::toString);
 
 	}
+	
+	/**
+	 * Define custom filter to filter the record based on the define algorithm.
+	 * 
+	 * @return Predicate
+	 */
+	public static Predicate<String> withFilter() {
+		return str -> str!=null && str.trim().length()>0;
+
+	}
+
 
 }
