@@ -37,7 +37,7 @@ public class FullNameScoreCalculator implements ScoreCalculator {
 		}
 		// Holding the index of each record in the sorted stream
 		AtomicLong atomicLong = new AtomicLong(1);
-		return inputDataStream.filter(withFilter()).sorted().map(name -> new IndexWrapper(name, atomicLong.getAndIncrement()))
+		return inputDataStream.filter(withFilter()).map(name -> new IndexWrapper(name, atomicLong.getAndIncrement()))
 				.map(this::computeScoreByFullName).reduce(0L, (a, b) -> a + b);
 	}
 
